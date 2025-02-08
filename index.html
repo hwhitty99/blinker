@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>blinker bois</title>
+    <link
+      id="favicon"
+      rel="icon"
+      type="image/x-icon"
+      href="/public/favicon-off.ico"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"
+    ></script>
+    <link href="/src/styles.css" rel="stylesheet" />
+    <script>
+      // Create canvas for dynamic favicon
+      const canvas = document.createElement("canvas");
+      canvas.width = 32;
+      canvas.height = 32;
+      const ctx = canvas.getContext("2d");
+
+      function updateFavicon(isOn) {
+        ctx.clearRect(0, 0, 32, 32);
+        ctx.beginPath();
+        ctx.arc(16, 16, 14, 0, Math.PI * 2);
+        ctx.fillStyle = isOn ? "#ef4444" : "transparent";
+        ctx.fill();
+
+        const link = document.getElementById("favicon");
+        link.href = canvas.toDataURL();
+      }
+    </script>
+  </head>
+
+  <body class="bg-zinc-950 font-mono text-zinc-500">
+    <div
+      x-data="{
+            interval: 3000,
+            duration: 1500,
+            startTime: null,
+            timer: '0.000',
+            isFlashing: false,
+            circumference: 2 * Math.PI * 56,
+            progress: 0,
+            lastFaviconState: false,
+            minFaviconDuration: 150,
+
+            init() {
+                this.startAnimation();
+            },
+
+            startAnimation() {
+                const animate = (timestamp) => {
+                    if (!this.startTime) this.startTime = timestamp;
+
+                    const elapsed = timestamp - this.startTime;
+                    this.progress = (elapsed % this.interval) / this.interval;
+
+                    const seconds = Math.floor((elapsed % this.interval) / 1000);
+                    const milliseconds = Math.floor((elapsed % this.interval) % 1000);
+                    this.timer = `${seconds}.${milliseconds.toString().padStart(3, '0')}`;
+
+                    const cycleTime = elapsed % this.interval;
+                    this.isFlashing = cycleTime <= this.duration;
+
+                    // favicon will only flash if the duration is greater than about 150ms
+                    // browser can't handle it changing any faster
+                    const faviconFlashing = cycleTime < Math.max(this.duration, this.minFaviconDuration);
+
+                    if (this.lastFaviconState !== faviconFlashing) {
+                        updateFavicon(faviconFlashing);
+                        this.lastFaviconState = faviconFlashing;
+                    }
+
+                    requestAnimationFrame(animate);
+                };
+
+                requestAnimationFrame(animate);
+            }
+        }"
+    >
+      <div class="fixed inset-0 flex flex-col items-center justify-center">
+        <div
+          class="flex w-full flex-col items-center justify-evenly lg:flex-row"
+        >
+          <template x-for="i in 3">
+            <div
+              :class="isFlashing ? 'bg-red-500 shadow-[0_0_25px_10px_rgba(239,68,68,0.5)]' : 'bg-zinc-950'"
+              class="hidden h-4 w-4 rounded-full transition-none lg:block"
+            ></div>
+          </template>
+          <div class="relative h-30 w-30">
+            <svg
+              class="absolute top-1/2 left-1/2 h-30 w-30 -translate-x-1/2 -translate-y-1/2 scale-125 -rotate-90 rotate-x-180"
+            >
+              <circle
+                cx="60"
+                cy="60"
+                r="56"
+                stroke-width="4"
+                class="rounded-full fill-none stroke-zinc-900"
+              ></circle>
+              <circle
+                cx="60"
+                cy="60"
+                r="56"
+                stroke-width="4"
+                class="rounded-full fill-none stroke-red-500"
+                :style="`stroke-dasharray: ${circumference}; stroke-dashoffset: ${circumference * progress}`"
+              ></circle>
+            </svg>
+            <div
+              :class="isFlashing ? 'bg-red-500 shadow-[0_0_25px_10px_rgba(239,68,68,0.5)]' : 'bg-zinc-950'"
+              class="absolute top-1/2 left-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full transition-none"
+            ></div>
+          </div>
+          <template x-for="i in 3">
+            <div
+              :class="isFlashing ? 'bg-red-500 shadow-[0_0_25px_10px_rgba(239,68,68,0.5)]' : 'bg-zinc-950'"
+              class="hidden h-4 w-4 rounded-full transition-none lg:block"
+            ></div>
+          </template>
+        </div>
+        <div class="mt-16 text-center text-2xl" x-text="timer"></div>
+      </div>
+
+      <div class="fixed bottom-0 left-1/2 flex -translate-x-1/2 gap-8 p-8">
+        <div class="flex flex-col gap-1">
+          <label for="interval">Interval (ms):</label>
+          <input
+            type="number"
+            x-model.debounce="interval"
+            min="100"
+            step="100"
+            class="w-32 rounded-lg border-2 border-zinc-800 bg-zinc-950 px-3 py-2 text-white focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none"
+          />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label for="duration">Duration (ms):</label>
+          <input
+            type="number"
+            x-model.debounce="duration"
+            min="50"
+            step="100"
+            class="w-32 rounded-lg border-2 border-zinc-800 bg-zinc-950 px-3 py-2 text-white focus:border-red-500 focus:ring-2 focus:ring-red-500/20 focus:outline-none"
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
