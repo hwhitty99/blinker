@@ -27,10 +27,6 @@ npm install
 npm run dev
 ```
 
-## License
-
-This project is licensed under the MIT License.
-
 ## Browser Support
 
 - Works best in modern browsers that support:
@@ -39,3 +35,7 @@ This project is licensed under the MIT License.
   - HTML Canvas API
   - CSS Transitions
   - Modern JavaScript features
+
+## License
+
+This project is licensed under the MIT License.
