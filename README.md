@@ -1,6 +1,6 @@
 # Blinker
 
-A sleek, customizable visual metronome with dynamic favicon support. Built with Vite, TailwindCSS, and AlpineJS. Built by me and Cody.
+One day while looking at a field of windmills in the country, I realized the little red lights on top all blinked in unison and consistently. I timed how often they blinked and for how long, then made a playlist on Spotify with only songs that matched the blink rate. I later realized that some windmills blink differently than others. I made this project to mimic a field of windmills.
 
 ## Features
 
