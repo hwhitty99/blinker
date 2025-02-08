@@ -1,15 +1,17 @@
+![windmills](https://kagi.com/proxy/ZOTS7SACZOJLEQV3XKA62JGUHA.jpg?c=mTFHxocPrx7G-_OUy6NnIzdSjNULBXxKNkb8GFxoDf6Tc3GpORViXcR_cijIj2SZHgifJdUf5VF0AYMXx9AQfwSivEE-15Wwu1Q1Ke3WXQDMpZm4jnnXEJHKretpUUq5srFd0JpWIYXiKsjdCxprYYOaQJxhnIJHOPAp009H21R2Xw86kfsU9lfOkyV-G-GFJHIObfOLWEQ0ony5vyf1zlonzGA0_Nwj2pbZ6KQ5lNMw-4P45u__KcA_Q5xhZW6z)
+
 # Blinker
 
-One day while looking at a field of windmills in the country, I realized the little red lights on top all blinked in unison and consistently. I timed how often they blinked and for how long, then made a playlist on Spotify with only songs that matched the blink rate. I later realized that some windmills blink differently than others. I made this project to mimic a field of windmills.
+One day while looking at a field of windmills in the country, I realized the little red lights on top all blinked in unison and consistently. I timed how often they blinked and for how long, then made a playlist of songs that "go with the blinking red lights". I later realized that some windmills blink differently than others. I made this project to mimic a field of windmills and to help me test songs and BPMs to see which ones work with which windmills.
 
 ## Features
 
-- Adjustable interval and duration controls
-- Smooth circular progress indicator
-- Dynamic favicon that blinks with the rhythm
-- Responsive design with additional indicators on larger screens
-- Precise millisecond timer display
-- Clean, modern dark UI
+- Interval and duration controls
+- Circular progress indicator
+- Favicon that blinks with rhythm
+- Design with indicators on screens
+- Timer display
+- Dark UI
 
 ## Tech Stack
 
@@ -29,12 +31,10 @@ npm run dev
 
 ## Browser Support
 
-- Works best in modern browsers that support:
-
-  - RequestAnimationFrame API
-  - HTML Canvas API
-  - CSS Transitions
-  - Modern JavaScript features
+- RequestAnimationFrame API
+- HTML Canvas API
+- CSS Transitions
+- Modern JavaScript features
 
 ## License
 
