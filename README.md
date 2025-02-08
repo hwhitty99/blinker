@@ -13,15 +13,15 @@ A sleek, customizable visual metronome with dynamic favicon support. Built with 
 
 ## Tech Stack
 
-- Vite
-- TailwindCSS
-- AlpineJS
-- HTML Canvas API
+- [Vite](https://vitejs.dev/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [AlpineJS](https://alpinejs.dev/)
+- [HTML Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
 
 ## See it in action
 
 ```bash
-git clone https://github.com/yourusername/blinker.git
+git clone https://github.com/hwhitty99/blinker.git
 cd blinker
 npm install
 npm run dev
